@@ -71,5 +71,11 @@ RSpec.describe StringCalculator, type: :model do
         expect(calculator.add("//[**][%%][;;;]\n1**2%%3;;;9")).to eq(15)
       end
     end
+
+    context 'ignore number greater than 1000' do
+      it 'ignores numbers larger than 1000' do
+        expect(calculator.add('2,1001')).to eq(2)
+      end
+    end
   end
 end
