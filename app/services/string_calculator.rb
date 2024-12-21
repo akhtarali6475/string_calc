@@ -8,6 +8,7 @@ class StringCalculator
       delimiter = /,|\n/
       delimiter, numbers = parse_custom_delimiter(numbers) if numbers.start_with?('//')
       number_list = numbers.split(delimiter).map(&:to_i)
+      number_list.reject! { |num| num > 1000 } # Ignore numbers larger than 1000
       validate_no_negatives(number_list)
       number_list.sum
     end
