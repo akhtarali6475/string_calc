@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe StringCalculator, type: :model do
-  let(:calculator) { described_class.new }
+  let(:calculator) { described_class }
 
   describe '#add' do
     context 'when the input is an empty string' do
