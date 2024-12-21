@@ -55,5 +55,21 @@ RSpec.describe StringCalculator, type: :model do
         expect { calculator.add("1,-2,-3,4") }.to raise_error("negative numbers not allowed: -2, -3")
       end
     end
+
+    context 'when the input supports delimiters of any length' do
+      it 'supports delimiters of any length' do
+        expect(calculator.add("//[***]\n1***2***3")).to eq(6)
+      end
+    end
+
+    context 'when the input supports multiple delimiters' do
+      it 'supports multiple delimiters' do
+        expect(calculator.add("//[*][%][;]\n1*2%3;5")).to eq(11)
+      end
+
+      it 'supports multiple delimiters with different lengths' do
+        expect(calculator.add("//[**][%%][;;;]\n1**2%%3;;;9")).to eq(15)
+      end
+    end
   end
 end
