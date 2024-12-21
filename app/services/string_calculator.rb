@@ -5,18 +5,19 @@ class StringCalculator
     return 0 if numbers.empty?
 
     delimiter = /,|\n/
-    if numbers.start_with?("//")
-      custom_delimiter, numbers = numbers.split("\n", 2)
-      delimiter = Regexp.new(Regexp.escape(custom_delimiter[2..]))
-    end
-
-    numbers_list = numbers.split(delimiter).map(&:to_i)
-    validate_no_negatives(numbers_list)
-
-    numbers_list.sum
+    delimiter, numbers = parse_custom_delimiter(numbers) if numbers.start_with?('//')
+    number_list = numbers.split(delimiter).map(&:to_i)
+    validate_no_negatives(number_list)
+    number_list.sum
   end
 
   private
+
+  def parse_custom_delimiter(numbers)
+    parts = numbers.split("\n", 2)
+    custom_delimiter = Regexp.escape(parts.first[2..-1]).split('').map { |char| '\\' + char }.join('|')
+    [Regexp.new(custom_delimiter), parts.last]
+  end
 
   def validate_no_negatives(numbers)
     negatives = numbers.select(&:negative?)
