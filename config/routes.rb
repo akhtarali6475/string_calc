@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  root 'string_calculators#index'
+  post 'add', to: 'string_calculators#add'
 end
