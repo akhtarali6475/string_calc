@@ -51,3 +51,9 @@ Start the Rails server:
 
 ```bash
 rails server
+```
+
+**Running the Test cases**:
+
+```bash
+bundle exec rspec
